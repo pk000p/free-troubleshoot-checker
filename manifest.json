@@ -1,0 +1,16 @@
+{
+  "name": "Free Troubleshoot Checker",
+  "short_name": "Troubleshoot Free",
+  "description": "Deploy hua lekin kaam nahi kar raha? Mobile se troubleshoot karo!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00d1ff",
+  "icons": [
+    {
+      "src": "https://assets.vercel.com/image/upload/front/favicon/vercel/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
