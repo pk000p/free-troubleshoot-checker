@@ -1,0 +1,98 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #000, #1a1a1a);
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+}
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+  position: relative; /* Ads ke liye */
+  z-index: 1;
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #00d1ff, #ff00c8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+p { margin-bottom: 30px; opacity: 0.8; }
+
+input {
+  width: 100%;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1rem;
+  background: #222;
+  color: white;
+}
+button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background: #00d1ff;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover { background: #00ffea; }
+
+#result, #loading {
+  margin-top: 30px;
+  padding: 20px;
+  background: #111;
+  border-radius: 12px;
+  text-align: left;
+  white-space: pre-wrap;
+  font-family: monospace;
+  display: none;
+}
+.hidden { display: none !important; }
+.success { border-left: 5px solid #00ff00; }
+.error { border-left: 5px solid #ff4444; }
+.warning { border-left: 5px solid #ffaa00; }
+
+/* Ads Styles */
+.sticky-ad {
+  position: fixed;
+  width: 100%;
+  max-width: 728px;
+  height: 90px;
+  background: #fff;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.top-ad { top: 0; }
+.bottom-ad { bottom: 0; }
+.normal-ad {
+  width: 100%;
+  max-width: 300px;
+  height: 250px;
+  margin: 20px auto;
+  background: #333;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .sticky-ad { max-width: 100%; height: 60px; }
+  .normal-ad { max-width: 100%; height: 200px; }
+  body { padding: 10px; }
+  h1 { font-size: 2rem; }
+  }
