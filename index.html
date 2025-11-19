@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Troubleshoot Checker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="https://assets.vercel.com/image/upload/front/favicon/vercel/57x57.png"/>
+  <meta name="theme-color" content="#000000"/>
+</head>
+<body>
+  <!-- Header Sticky Ad Slot -->
+  <div id="header-ad" class="sticky-ad top-ad"></div>
+
+  <div class="container">
+    <h1>Free Troubleshoot Checker</h1>
+    <p>Deploy hua hai lekin kaam nahi kar raha? Yahan se mobile se hi pata karo!</p>
+
+    <!-- Normal Ad 1 (Above input) -->
+    <div id="normal-ad-1" class="normal-ad"></div>
+
+    <input type="text" id="url" placeholder="Vercel URL daalo (ex: https://abc.vercel.app)" />
+    <button onclick="checkProject()">Check Karo</button>
+
+    <div id="loading" class="hidden">Checking deployment & logs...</div>
+
+    <div id="result"></div>
+
+    <!-- Normal Ad 2 (Below result) -->
+    <div id="normal-ad-2" class="normal-ad"></div>
+  </div>
+
+  <!-- Footer Sticky Ad Slot -->
+  <div id="footer-ad" class="sticky-ad bottom-ad"></div>
+
+  <script src="script.js"></script>
+</body>
+      </html>
