@@ -8,6 +8,20 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="https://assets.vercel.com/image/upload/front/favicon/vercel/57x57.png"/>
   <meta name="theme-color" content="#000000"/>
+  <!-- Mobile DevTools (Console + Network + Elements) -->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+  eruda.init();
+  eruda.add(eruda.console);
+  eruda.add(eruda.network);
+  eruda.add(eruda.timing);
+</script>
+
+<!-- Ek floating button bhi add kar denge jo mobile pe dikhega -->
+<div id="mobile-console-btn" onclick="eruda.show()" 
+     style="position:fixed;bottom:20px;right:20px;background:#00d1ff;color:black;padding:12px 16px;border-radius:50%;font-weight:bold;z-index:9999;box-shadow:0 4px 20px rgba(0,209,255,0.6);cursor:pointer;">
+  Console
+</div>
 </head>
 <body>
   <!-- Header Sticky Ad Slot -->
