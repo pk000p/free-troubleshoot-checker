@@ -1,100 +1,62 @@
-// Adsterra Ads Configuration (Apne real keys replace karo)
-const adConfigs = {
-  header: { key: 'YOUR_HEADER_AD_KEY_HERE', format: 'iframe', height: 90, width: 728 }, // Sticky Header
-  footer: { key: 'YOUR_FOOTER_AD_KEY_HERE', format: 'iframe', height: 90, width: 728 }, // Sticky Footer
-  normal1: { key: 'YOUR_NORMAL_AD1_KEY_HERE', format: 'iframe', height: 250, width: 300 }, // Normal 1
-  normal2: { key: 'YOUR_NORMAL_AD2_KEY_HERE', format: 'iframe', height: 250, width: 300 }  // Normal 2
+// Adsterra Ads (Apne real keys daal dena)
+const adKeys = {
+  header: 'YOUR_HEADER_KEY',
+  footer: 'YOUR_FOOTER_KEY',
+  normal1: 'YOUR_NORMAL1_KEY',
+  normal2: 'YOUR_NORMAL2_KEY'
 };
 
-// Function to load Adsterra Ad
-function loadAd(containerId, config) {
-  const container = document.getElementById(containerId);
-  if (!container || container.firstChild) return; // Avoid duplicates
-
-  const conf = document.createElement('script');
-  const script = document.createElement('script');
-  
-  conf.innerHTML = `var ${containerId}Options = ${JSON.stringify(config)};`;
-  script.type = 'text/javascript';
-  script.src = `//www.profitabledisplayformat.com/${config.key}/invoke.js`; // Adsterra endpoint (standard)
-  
-  container.appendChild(conf);
-  container.appendChild(script);
+function loadAd(id, key) {
+  if (!key.includes('YOUR_')) return;
+  const s = document.createElement('script');
+  s.src = `//www.profitabledisplayformat.com/${key}/invoke.js`;
+  document.getElementById(id).appendChild(s);
 }
+window.onload = () => {
+  loadAd('header-ad', adKeys.header);
+  loadAd('footer-ad', adKeys.footer);
+  loadAd('normal-ad-1', adKeys.normal1);
+  loadAd('normal-ad-2', adKeys.normal2);
+};
 
-// Load all ads on page load
-document.addEventListener('DOMContentLoaded', function() {
-  loadAd('header-ad', adConfigs.header);
-  loadAd('footer-ad', adConfigs.footer);
-  loadAd('normal-ad-1', adConfigs.normal1);
-  loadAd('normal-ad-2', adConfigs.normal2);
-});
-
-// Original checkProject function (same as before)
 async function checkProject() {
   const url = document.getElementById("url").value.trim();
   const result = document.getElementById("result");
   const loading = document.getElementById("loading");
-  result.innerHTML = "";
+  result.style.display = "none";
   loading.classList.remove("hidden");
 
-  if (!url) {
-    showResult("Error: URL daal bhai!", "error");
+  if (!url || !url.includes('vercel.app')) {
+    showResult("Galat URL! Vercel link daalo → https://project.vercel.app", "error");
+    loading.classList.add("hidden");
     return;
   }
 
   try {
-    // 1. Site live hai ya nahi?
-    const res = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url), {
-      method: "GET",
-      headers: { "Accept": "text/html" }
-    });
-
+    const res = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url));
     if (res.status === 200) {
-      showResult("Site live hai (200 OK)", "success");
+      showResult(`Site LIVE hai (200 OK)
 
-      // 2. Vercel project name nikaal lo
-      const domain = new URL(url).hostname;
-      let projectName = domain.split('.')[0];
+Agar phir bhi kaam nahi kar rahi to mobile pe neeche "Console" button dabao → sab errors khud dekh lo!
 
-      // Agar vercel.app nahi hai to custom domain ho sakta hai
-      if (!domain.includes("vercel.app")) {
-        showResult("Warning: Custom domain detect hua. Logs ke liye Vercel URL chahiye (ex: project.vercel.app)", "warning");
-      }
-
-      // 3. Vercel logs try karo (public deployments ke liye kaam karta hai)
-      const logUrl = `https://${projectName}.vercel.app/api/logs`;
-      const logRes = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(logUrl));
-      
-      if (logRes.ok) {
-        const logs = await logRes.text();
-        if (logs.includes("Error") || logs.includes("Failed")) {
-          showResult("Deployment Logs:\n\n" + logs.substring(0, 1000), "error");
-        } else {
-          showResult("Build successful lag rahi hai!\n\nAgar phir bhi kaam nahi kar rahi to:\n• Console kholo (F12)\n• .env variables check karo\n• API routes sahi hain?", "success");
-        }
-      } else {
-        // Alternative: Common issues
-        showResult(`Common Problems:\n
-1. .env file Vercel mein add nahi kiya
-2. Build command galat hai (ex: npm run build nahi chal raha)
-3. API route mein error aa raha (console check karo)
-4. CORS issue (backend allow nahi kar raha)
-
-Mobile se console dekhne ke liye:
-Chrome → Menu → Developer Tools → Remote Debugging use karo`, "warning");
-      }
-
+Common Problems:
+• .env variables Vercel mein add nahi kiye
+• API route fail ho raha (404/500)
+• CORS block kar raha
+• JavaScript error aa raha (red color mein dikhega)`, "success");
     } else {
-      showResult(`Site down hai! Status: ${res.status}\n\nPossible Reasons:
-• Build fail hua
+      showResult(`Site DOWN hai! Status: ${res.status}
+
+Possible Reasons:
+• Build fail ho gaya
 • Project delete ho gaya
 • Wrong URL daala`, "error");
     }
   } catch (err) {
-    showResult("Kuch network issue hai ya CORS block kar raha hai.\n\nTip: Mobile Chrome mein 'vconsole' extension use karo logs dekhne ke liye", "error");
-  }
+    showResult(`Network/CORS issue hai
 
+Mobile pe "Console" button dabao → Network tab mein failed requests dekh lo`, "error");
+  }
   loading.classList.add("hidden");
 }
 
