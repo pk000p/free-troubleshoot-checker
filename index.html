@@ -8,46 +8,45 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="https://assets.vercel.com/image/upload/front/favicon/vercel/57x57.png"/>
   <meta name="theme-color" content="#000000"/>
-  <!-- Mobile DevTools (Console + Network + Elements) -->
-<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>
-  eruda.init();
-  eruda.add(eruda.console);
-  eruda.add(eruda.network);
-  eruda.add(eruda.timing);
-</script>
-
-<!-- Ek floating button bhi add kar denge jo mobile pe dikhega -->
-<div id="mobile-console-btn" onclick="eruda.show()" 
-     style="position:fixed;bottom:20px;right:20px;background:#00d1ff;color:black;padding:12px 16px;border-radius:50%;font-weight:bold;z-index:9999;box-shadow:0 4px 20px rgba(0,209,255,0.6);cursor:pointer;">
-  Console
-</div>
 </head>
 <body>
-  <!-- Header Sticky Ad Slot -->
+
+  <!-- Header Sticky Ad -->
   <div id="header-ad" class="sticky-ad top-ad"></div>
 
   <div class="container">
     <h1>Free Troubleshoot Checker</h1>
-    <p>Deploy hua hai lekin kaam nahi kar raha? Yahan se mobile se hi pata karo!</p>
+    <p>Vercel pe deploy toh hua, lekin kaam nahi kar raha?<br>Mobile se hi error pata karo!</p>
 
-    <!-- Normal Ad 1 (Above input) -->
     <div id="normal-ad-1" class="normal-ad"></div>
 
-    <input type="text" id="url" placeholder="Vercel URL daalo (ex: https://abc.vercel.app)" />
+    <input type="text" id="url" placeholder="Vercel URL daalo → https://abc.vercel.app" />
     <button onclick="checkProject()">Check Karo</button>
 
-    <div id="loading" class="hidden">Checking deployment & logs...</div>
-
+    <div id="loading" class="hidden">Checking deployment...</div>
     <div id="result"></div>
 
-    <!-- Normal Ad 2 (Below result) -->
     <div id="normal-ad-2" class="normal-ad"></div>
   </div>
 
-  <!-- Footer Sticky Ad Slot -->
+  <!-- Footer Sticky Ad -->
   <div id="footer-ad" class="sticky-ad bottom-ad"></div>
 
+  <!-- Mobile Console Button (Sirf mobile pe dikhega) -->
+  <div id="mobile-console-btn" onclick="toggleVConsole()">
+    Console
+  </div>
+
   <script src="script.js"></script>
+
+  <!-- vConsole – Clean, No Errors, Super Fast -->
+  <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+  <script>
+    var vConsole = new VConsole({ theme: 'dark' });
+    function toggleVConsole() {
+      vConsole.show();
+    }
+  </script>
+
 </body>
-      </html>
+</html>
