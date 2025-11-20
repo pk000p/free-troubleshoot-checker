@@ -96,3 +96,12 @@ button:hover { background: #00ffea; }
   body { padding: 10px; }
   h1 { font-size: 2rem; }
   }
+/* Mobile Console Button ko responsive banao */
+#mobile-console-btn {
+  display: none;
+}
+@media (max-width: 768px) {
+  #mobile-console-btn {
+    display: block !important;
+  }
+}
